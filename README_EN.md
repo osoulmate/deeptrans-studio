@@ -46,6 +46,12 @@ DeepTrans Studio integrates AI translation, localization engineering, and team c
 - Workflow automation and queue-based task processing
 - Unified authentication, logging, operational configuration, and external APIs
 
+<p align="center">
+  <img src="public/ui.png" alt="DeepTrans Studio UI" width="900">
+  <br/>
+  <em>DeepTrans Studio UI </em>
+ </p>
+
 ## Core Features
 
 - **Translation IDE**: Provides segment alignment, version tracking, keyboard shortcuts, and multi-agent collaborative translation workbench.
