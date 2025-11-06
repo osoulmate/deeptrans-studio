@@ -246,7 +246,7 @@ The project uses [next-intl](https://next-intl-docs.vercel.app/) to manage multi
 
 ## About
 
-- This repository is developed by CogNLP Lab at Shanghai University for ACL Demo Paper (2025) submission and reproduction demonstration.
+- This repository is developed by CogNLP Lab at Shanghai University for Demo Paper (2025) submission and reproduction demonstration.
 - The repository does not include production keys and sensitive configurations by default. For deployment, create your own `.env` and replace service credentials.
 - If you encounter issues during reproduction, please communicate via GitHub Issues or contact information provided in the paper.
 
