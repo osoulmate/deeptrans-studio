@@ -46,6 +46,12 @@ DeepTrans Studio 将 AI 翻译、本地化工程与团队协作能力整合在�
 - 工作流自动化与队列任务处理
 - 统一的权限、日志、运营配置与对外 API
 
+<p align="center">
+  <img src="public/ui.png" alt="DeepTrans Studio UI" width="900">
+  <br/>
+  <em>DeepTrans Studio 界面示意</em>
+ </p>
+
 ## 核心能力
 
 - **翻译 IDE**：提供段落对齐、版本追踪、快捷键与多智能体协同的翻译工作台。
@@ -156,7 +162,7 @@ yarn db:seed                    # 可选：导入示例数据
    ```
 2. 启动 Next.js 应用（热更新）：
    ```bash
-yarn dev
+   yarn dev
    ```
 3. 若希望在本地 Node 环境运行 Worker，可执行 `yarn dev:worker`（默认通过 compose 的 `worker` 容器运行）。
 
