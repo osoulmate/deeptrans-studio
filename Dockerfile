@@ -13,6 +13,7 @@ RUN mkdir -p prisma
 
 # 复制 prisma 目录
 COPY prisma ./prisma/
+RUN apt-get update -y && apt-get install -y openssl libssl-dev
 
 # 修改这一行: 使用 npm install 替代 npm ci
 RUN npm install --legacy-peer-deps --ignore-scripts --no-audit --no-fund
