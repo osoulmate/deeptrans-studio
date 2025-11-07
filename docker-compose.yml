@@ -75,7 +75,7 @@ services:
     networks:
       - web
 
-  studio:
+  website:
     build:
       context: .
       dockerfile: Dockerfile
