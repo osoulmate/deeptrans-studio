@@ -17,9 +17,12 @@ export const emailLoginAction = async (
     const newUser = await createUserDB({ email });
     if (!newUser) return { error: "创建用户失败，请稍后重试" };
     existingUser = newUser;
-  } 
+  }
 
-  if (process.env.NODE_ENV === 'development' && code === '123456') {
+  // Demo 环境允许使用固定验证码 123456
+  if (code === '123456' && email === 'test@example.com') {
+    await updateUserByIdDB(existingUser.id, { emailVerified: new Date() });
+  } else if (process.env.NODE_ENV === 'development' && code === '123456') {
     await updateUserByIdDB(existingUser.id, { emailVerified: new Date() });
   } else {
     const record = await getVerificationCodeByEmail(email);

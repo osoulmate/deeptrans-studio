@@ -11,6 +11,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { EmailLoginForm } from "./email-login-form"
 import { useTranslations } from "next-intl"
 
+const isDemo = process.env.NEXT_PUBLIC_DEMO === "true";
 export const LoginCard = () => {
     const t = useTranslations("Auth");
 
@@ -49,8 +50,9 @@ export const LoginCard = () => {
                         </div>
                     </TabsContent>
                 </Tabs>
-                <div className="text-center text-sm mt-4">
-                    {t("noAccount")} <a className="underline" href="/auth/register">{t("goRegister")}</a>
+                <div className="text-center text-sm mt-4 text-muted-foreground">
+                    {isDemo ? (<>{t("demoAccount")}: test@example.com / 123456</>) :
+                     (<>{t("noAccount")} <a className="underline" href="/auth/register">{t("goRegister")}</a></>)}
                 </div>
             </CardContent>
         </Card>
