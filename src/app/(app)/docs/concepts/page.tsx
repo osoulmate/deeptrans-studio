@@ -14,7 +14,7 @@ export default async function ConceptsPage() {
   const t = getPageT(translations);
   const page = translations.concepts;
   
-  const conceptIcons: Record<string, any> = {
+  const conceptIcons: Record<string, React.ComponentType<{ className?: string }>> = {
     project: FolderOpen,
     document: FileText,
     segment: Type,
@@ -51,8 +51,8 @@ export default async function ConceptsPage() {
 
         <div className="grid gap-6">
           {Object.entries(page.concepts).map(([key, concept]) => {
-            const Icon = conceptIcons[key] || BookOpen;
-            const colorClass = conceptColors[key] || "bg-gray-100 text-gray-600";
+            const Icon = conceptIcons[key] ?? BookOpen;
+            const colorClass = conceptColors[key] ?? "bg-gray-100 text-gray-600";
             
             return (
               <Card key={key}>
@@ -68,14 +68,42 @@ export default async function ConceptsPage() {
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <ul className="space-y-2">
-                    {concept.details.map((detail, index) => (
-                      <li key={index} className="flex items-start gap-2 text-sm">
-                        <span className="text-primary mt-0.5">•</span>
-                        <span className="text-muted-foreground">{detail}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  <div className="space-y-4">
+                    {/* 图片展示 */}
+                    {(() => {
+                      type ConceptWithImage = typeof concept & { image?: string };
+                      const conceptWithImage = concept as ConceptWithImage;
+                      const imageUrl = conceptWithImage?.image;
+                      return imageUrl?.trim() ? (
+                        <div className="relative w-full rounded-lg border border-border overflow-auto bg-muted/50 shadow-sm">
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={imageUrl}
+                            alt={concept.title}
+                            className="block"
+                            style={{ 
+                              width: '100%',
+                              height: 'auto',
+                              maxWidth: '100%',
+                              display: 'block',
+                              imageRendering: 'auto'
+                            } as React.CSSProperties}
+                            loading="lazy"
+                            decoding="sync"
+                          />
+                        </div>
+                      ) : null;
+                    })()}
+                    {/* 详细信息 */}
+                    <ul className="space-y-2">
+                      {concept.details.map((detail, index) => (
+                        <li key={index} className="flex items-start gap-2 text-sm">
+                          <span className="text-primary mt-0.5">•</span>
+                          <span className="text-muted-foreground">{detail}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </CardContent>
               </Card>
             );

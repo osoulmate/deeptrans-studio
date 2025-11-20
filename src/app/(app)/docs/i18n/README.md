@@ -8,8 +8,30 @@
 i18n/
 ├── zh.json          # 中文翻译（首页和导航）
 ├── en.json          # 英文翻译（首页和导航）
-├── pages-zh.json    # 中文翻译（子页面内容）
-├── pages-en.json    # 英文翻译（子页面内容）
+├── pages-zh/        # 拆分后的中文页面翻译文件
+│   ├── gettingStarted-zh.json
+│   ├── concepts-zh.json
+│   ├── workflows-zh.json
+│   ├── installation-zh.json
+│   ├── ui-zh.json
+│   ├── serverActions-zh.json
+│   ├── state-zh.json
+│   ├── ai-zh.json
+│   ├── database-zh.json
+│   ├── troubleshooting-zh.json
+│   └── faq-zh.json
+├── pages-en/        # 拆分后的英文页面翻译文件
+│   ├── gettingStarted-en.json
+│   ├── concepts-en.json
+│   ├── workflows-en.json
+│   ├── installation-en.json
+│   ├── ui-en.json
+│   ├── serverActions-en.json
+│   ├── state-en.json
+│   ├── ai-en.json
+│   ├── database-en.json
+│   ├── troubleshooting-en.json
+│   └── faq-en.json
 ├── index.ts         # 国际化工具函数
 └── README.md        # 本文件
 ```
@@ -73,9 +95,13 @@ export default async function GettingStartedPage() {
   - `quickLinks`: 快速链接
 - `common`: 通用文案
 
-### pages-zh.json / pages-en.json（子页面）
+### pages-zh/ 和 pages-en/ 目录（拆分后的子页面翻译）
 
-每个页面包含：
+每个页面都有独立的 JSON 文件：
+- 中文：`pages-zh/gettingStarted-zh.json`、`pages-zh/concepts-zh.json` 等
+- 英文：`pages-en/gettingStarted-en.json`、`pages-en/concepts-en.json` 等
+
+每个页面文件包含：
 - `title`: 页面标题
 - `subtitle`: 页面副标题
 - 页面特定内容（如 steps、concepts 等）
@@ -114,10 +140,11 @@ export default async function GettingStartedPage() {
 
 ## 添加新的翻译
 
-1. 在 `pages-zh.json` 中添加中文翻译
-2. 在 `pages-en.json` 中添加对应的英文翻译
-3. 确保两个文件的结构保持一致
-4. 在页面组件中使用 `getPageTranslations()` 和 `getPageT()`
+1. 在 `pages-zh/` 目录下创建新的中文页面翻译文件，例如 `newPage-zh.json`
+2. 在 `pages-en/` 目录下创建对应的英文页面翻译文件，例如 `newPage-en.json`
+3. 在 `index.ts` 中导入并合并新文件（中英文都需要导入）
+4. 确保中英文文件的结构保持一致
+5. 在页面组件中使用 `getPageTranslations()` 和 `getPageT()`
 
 ## 工具函数
 

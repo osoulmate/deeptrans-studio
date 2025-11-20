@@ -63,13 +63,36 @@ export default async function GettingStartedPage() {
                 </div>
               </CardHeader>
               <CardContent>
-                <div className="space-y-2">
-                  <p className="text-sm font-medium">💡 提示：</p>
-                  <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
-                    {step.tips.map((tip, i) => (
-                      <li key={i}>{tip}</li>
-                    ))}
-                  </ul>
+                <div className="space-y-4">
+                  {/* 图片展示 */}
+                  {step.image && (
+                    <div className="relative w-full rounded-lg border border-border overflow-auto bg-muted/50 shadow-sm">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={step.image}
+                        alt={step.title}
+                        className="block"
+                        style={{ 
+                          width: '100%',
+                          height: 'auto',
+                          maxWidth: '100%',
+                          display: 'block',
+                          imageRendering: 'auto'
+                        } as React.CSSProperties}
+                        loading={index === 0 ? 'eager' : 'lazy'}
+                        decoding="sync"
+                      />
+                    </div>
+                  )}
+                  {/* 提示信息 */}
+                  <div className="space-y-2">
+                    <p className="text-sm font-medium">{t('gettingStarted.tipsLabel')}</p>
+                    <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
+                      {step.tips.map((tip, i) => (
+                        <li key={i}>{tip}</li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
               </CardContent>
             </Card>

@@ -131,7 +131,10 @@
     "next": "下一页",
     "onThisPage": "本页目录",
     "backToTop": "返回顶部",
-    "lastUpdated": "最后更新"
+    "lastUpdated": "最后更新",
+    "copy": "复制",
+    "copied": "已复制",
+    "copyCode": "复制代码"
   }
 }
 

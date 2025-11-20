@@ -552,6 +552,9 @@
         "edit": "Edit",
         "view": "View",
         "close": "Close",
+        "copy": "Copy",
+        "copied": "Copied",
+        "copyCode": "Copy code",
         "domains": {
             "general": "General",
             "technology": "Technology",

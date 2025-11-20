@@ -1,9 +1,12 @@
 "use client";
 import { Copy } from "lucide-react";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 export function CodeBlock({ code, language = "bash" }: { code: string; language?: string }) {
   const [copied, setCopied] = useState(false);
+  const t = useTranslations("Common");
+  
   return (
     <div className="group relative rounded-lg border border-primary/20 bg-primary/5">
       <pre className="overflow-x-auto p-4 text-xs leading-6">
@@ -16,9 +19,9 @@ export function CodeBlock({ code, language = "bash" }: { code: string; language?
           setCopied(true);
           setTimeout(() => setCopied(false), 1200);
         }}
-        aria-label="复制代码"
+        aria-label={t("copyCode")}
       >
-        <Copy className="h-3.5 w-3.5" /> {copied ? "已复制" : "复制"}
+        <Copy className="h-3.5 w-3.5" /> {copied ? t("copied") : t("copy")}
       </button>
     </div>
   );

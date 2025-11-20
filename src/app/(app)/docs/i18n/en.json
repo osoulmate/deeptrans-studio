@@ -131,7 +131,10 @@
     "next": "Next",
     "onThisPage": "On This Page",
     "backToTop": "Back to Top",
-    "lastUpdated": "Last Updated"
+    "lastUpdated": "Last Updated",
+    "copy": "Copy",
+    "copied": "Copied",
+    "copyCode": "Copy code"
   }
 }
 

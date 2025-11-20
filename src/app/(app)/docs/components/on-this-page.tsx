@@ -2,8 +2,10 @@
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
+type Heading = { id: string; text: string; level: number };
+
 export function OnThisPage() {
-  const [headings, setHeadings] = useState<{ id: string; text: string }[]>([]);
+  const [headings, setHeadings] = useState<Heading[]>([]);
   const pathname = usePathname();
 
   // 读取当前页面的 heading；在路由变化或 DOM 变化时更新
@@ -11,13 +13,25 @@ export function OnThisPage() {
     const compute = () => {
       const main = document.querySelector("main");
       if (!main) return;
-      const nodes = Array.from(main.querySelectorAll("h1, h2"));
+      const nodes = Array.from(main.querySelectorAll("h1, h2, h3"));
       nodes.forEach((n: Element) => {
-        if (!n.id && n.textContent) n.id = n.textContent.trim().toLowerCase().replace(/\s+/g, "-");
+        if (!n.id && n.textContent) {
+          const text = n.textContent.trim();
+          // 生成 ID：将文本转换为小写，替换空格为连字符，移除特殊字符
+          n.id = text.toLowerCase().replace(/\s+/g, "-").replace(/[^\w\u4e00-\u9fa5-]/g, "");
+        }
       });
       const computed = nodes
         .filter((n) => n.id || n.textContent)
-        .map((n) => ({ id: n.id ?? (n.textContent ?? "").trim().toLowerCase().replace(/\s+/g, "-"), text: n.textContent ?? "" }));
+        .map((n) => {
+          const tagName = n.tagName.toLowerCase();
+          const level = parseInt(tagName.charAt(1));
+          return {
+            id: n.id ?? (n.textContent ?? "").trim().toLowerCase().replace(/\s+/g, "-"),
+            text: n.textContent ?? "",
+            level
+          };
+        });
       setHeadings(computed);
     };
 
@@ -48,7 +62,7 @@ export function OnThisPage() {
 
   useEffect(() => {
     if (!headings.length) return;
-    const nodes = Array.from(document.querySelectorAll("main h1, main h2"));
+    const nodes = Array.from(document.querySelectorAll("main h1, main h2, main h3"));
     const observer = new IntersectionObserver(
       () => {
         // 由于不再需要追踪活动标题，我们可以移除这部分逻辑
@@ -69,9 +83,9 @@ export function OnThisPage() {
           <a
             key={h.id}
             href={`#${h.id}`}
-            className={
-              "block rounded-md px-2 py-1 text-muted-foreground hover:text-foreground active:font-medium transition-colors"
-            }
+            className={`block rounded-md px-2 py-1 text-muted-foreground hover:text-foreground active:font-medium transition-colors ${
+              h.level === 3 ? 'ml-4 text-xs' : ''
+            }`}
           >
             {h.text}
           </a>
