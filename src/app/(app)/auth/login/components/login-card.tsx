@@ -11,6 +11,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { EmailLoginForm } from "./email-login-form"
 import { useTranslations } from "next-intl"
 
+const isDemo = process.env.NEXT_PUBLIC_DEMO === "true";
 export const LoginCard = () => {
     const t = useTranslations("Auth");
 
@@ -50,26 +51,8 @@ export const LoginCard = () => {
                     </TabsContent>
                 </Tabs>
                 <div className="text-center text-sm mt-4 text-muted-foreground">
-                    {(() => {
-                        // Use a public build-time env var in a way that avoids referencing
-                        // the `process` symbol directly (some editing/typecheck environments
-                        // may not have Node typings). Assumption: demo flag provided via NEXT_PUBLIC_DEMO.
-                        const isDemo = Boolean((globalThis as any)?.NEXT_PUBLIC_DEMO ?? (globalThis as any)?.process?.env?.NEXT_PUBLIC_DEMO);
-
-                        if (isDemo) {
-                            return (
-                                <>
-                                    {t("demoAccount")}: test@example.com / 123456
-                                </>
-                            )
-                        }
-
-                        return (
-                            <>
-                                {t("noAccount")} <a className="underline" href="/auth/register">{t("goRegister")}</a>
-                            </>
-                        )
-                    })()}
+                    {isDemo ? (<>{t("demoAccount")}: test@example.com / 123456</>) :
+                     (<>{t("noAccount")} <a className="underline" href="/auth/register">{t("goRegister")}</a></>)}
                 </div>
             </CardContent>
         </Card>
